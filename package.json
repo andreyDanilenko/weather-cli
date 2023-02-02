@@ -1,0 +1,39 @@
+{
+  "name": "weather-cli",
+  "version": "1.0.0",
+  "private": false,
+  "description": "weather",
+  "main": "index.js",
+  "browser": "",
+  "bin": "./index.js",
+  "os": [],
+  "cpu": [],
+  "man": [
+    "./README.md"
+  ],
+  "engines": {
+    "node": ">14"
+  },
+  "funding": [],
+  "files": [
+    "./src/**/*.js"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cli",
+    "weather"
+  ],
+  "author": "Andrew Danilenko",
+  "license": "ISC",
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "bugs": {
+    "url": "",
+    "email": ""
+  }
+}
