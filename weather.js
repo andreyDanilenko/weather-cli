@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import * as dotenv from 'dotenv'
+dotenv.config()
 import { getArgs } from './helpers/args.js'
 import { getWeather } from './services/api.service.js';
 import { printHelp, printSuccess, printError } from './services/log.service.js';
@@ -19,7 +21,6 @@ const saveToken = async (token) => {
 
 const initCli = () => {
     const args = getArgs(process.argv)
-    console.log(process.env);
 
     if (args.h) {
         printHelp()
@@ -36,7 +37,7 @@ const initCli = () => {
         // Сохранить токен
     }
 
-    // getWeather('moscow')
+    getWeather('moscow')
     // Вывести погоду
 }
 
