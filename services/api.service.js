@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getKeyValue, TOKEN_DICTIONARY } from './storage.service.js'
 
 const getWeather = async (city) => {
-    const token = process.env.API_KEY && await getKeyValue(TOKEN_DICTIONARY.token);
+    const token = process.env.API_KEY || await getKeyValue(TOKEN_DICTIONARY.token);
     if (!token) {
         throw new Error('api key not passed -t [API_KEY]')
     }
@@ -16,7 +16,7 @@ const getWeather = async (city) => {
         }
     })
 
-    console.log(data);
+    return data;
 }
 
 export { getWeather }
