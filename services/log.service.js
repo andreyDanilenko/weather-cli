@@ -13,10 +13,22 @@ const printHelp = () => {
     console.log(
         dedent`${chalk.bgCyan('HELP')}
         Without parameters - weather output
-        -s [CITY] to select a city
+        -c [CITY] to select a city
         -h to get help
         -t [API_KEY] to save a token`
     );
 }
 
-export { printError, printSuccess, printHelp }
+const printWeather = (res, icon) => {
+    console.log(res, icon);
+    console.log(
+        dedent`${chalk.bgBlueBright('WEATHER')} weather in ${res.name}
+        ${icon}  ${res.weather[0].description}
+        Temperature: ${res.main.temp} (feels like ${res.main.feels_like})
+        Humidity: ${res.main.humidity}%
+        Wind speed: ${res.wind.speed}
+        `
+    );
+}
+
+export { printError, printSuccess, printHelp, printWeather }

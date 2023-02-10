@@ -2,9 +2,9 @@
 import * as dotenv from 'dotenv'
 dotenv.config()
 import { getArgs } from './helpers/args.js'
-import { getWeather } from './services/api.service.js';
-import { printHelp, printSuccess, printError } from './services/log.service.js';
-import { saveKeyValue, TOKEN_DICTIONARY } from './services/storage.service.js';
+import { getWeather, getIcon } from './services/api.service.js';
+import { printHelp, printSuccess, printError, printWeather } from './services/log.service.js';
+import { getKeyValue, saveKeyValue, TOKEN_DICTIONARY } from './services/storage.service.js';
 
 const saveToken = async (token) => {
     if (!token.length) {
@@ -18,11 +18,26 @@ const saveToken = async (token) => {
         printError(e.message)
     }
 }
+const saveCity = async (city) => {
+    if (!city.length) {
+        printError('no city passed')
+        return
+    }
+    try {
+        await saveKeyValue(TOKEN_DICTIONARY.city, city)
+        printSuccess('City save')
+    } catch (e) {
+        printError(e.message)
+    }
+}
 
 const getForCast = async () => {
+
     try {
-        const weather = await getWeather('saint petersburg');
-        console.log(weather);
+        const city =  await getKeyValue(TOKEN_DICTIONARY.city)
+        console.log(city);
+        const weather = await getWeather(city);
+        printWeather(weather, getIcon(weather.weather[0].icon))
     } catch (e) {
         if (e?.response?.status === 404) {
             printError('Wrong city')
@@ -38,22 +53,19 @@ const initCli = () => {
     const args = getArgs(process.argv)
 
     if (args.h) {
-        printHelp()
-        // Вывод help
+        return printHelp()
     }
 
-    if (args.s) {
-        printSuccess('Hello')
-        // Сохранить город
+    if (args.c) {
+        console.log(args.c);
+        return saveCity(args.c)
     }
 
     if (args.t) {
         return saveToken(args.t)
-        // Сохранить токен
     }
 
-    getForCast()
-    // Вывести погоду
+    return getForCast()
 }
 
 initCli()
