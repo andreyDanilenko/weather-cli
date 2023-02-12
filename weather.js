@@ -35,7 +35,6 @@ const getForCast = async () => {
 
     try {
         const city =  await getKeyValue(TOKEN_DICTIONARY.city)
-        console.log(city);
         const weather = await getWeather(city);
         printWeather(weather, getIcon(weather.weather[0].icon))
     } catch (e) {
@@ -57,7 +56,6 @@ const initCli = () => {
     }
 
     if (args.c) {
-        console.log(args.c);
         return saveCity(args.c)
     }
 

@@ -1,6 +1,6 @@
 {
-  "name": "weather-cli",
-  "version": "1.0.0",
+  "name": "weather-cli-for-andrdan",
+  "version": "1.0.1",
   "description": "weather",
   "main": "weather.js",
   "bin": {
@@ -8,7 +8,7 @@
   },
   "type": "module",
   "scripts": {
-    "start": "cross-env node ./weather.js",
+    "start": "node ./weather.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
